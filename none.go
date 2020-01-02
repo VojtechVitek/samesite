@@ -6,7 +6,11 @@ import (
 	"github.com/avct/uasurfer"
 )
 
-// Returns true if given browser User-Agent is incompatible with SameSite=None cookie attribute.
+// Returns SameSite=None cookie attribute based on the list of incompatible browsers,
+// as described at https://www.chromium.org/updates/same-site/incompatible-clients.
+//
+// Imcompatible browser: returns 0 to drop the attribute
+// Compatible browser: returns http.SameSiteNoneMode
 func None(userAgent string) http.SameSite {
 	ua := uasurfer.Parse(userAgent)
 
