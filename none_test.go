@@ -3,32 +3,30 @@ package samesite_test
 import (
 	"net/http"
 	"testing"
-	"time"
 
 	"github.com/VojtechVitek/samesite"
 )
 
 func ExampleCookieSetSameSiteNone() {
 	// import "github.com/VojtechVitek/samesite"
+	//
+	// func SetCookieHandler(w http.ResponseWriter, r *http.Request) {
+	// 	cookie := http.Cookie{
+	// 		Name:     "name",
+	// 		Domain:   "example.com",
+	// 		Path:     "/",
+	// 		Secure:   true,                         // HTTPS only.
+	// 		SameSite: samesite.None(r.UserAgent()), // Set SameSite=None unless browser is incompatible.
+	// 		HttpOnly: true,
+	// 		MaxAge:   3600 * 24 * 365,
+	// 		Expires:  time.Now().AddDate(1, 0, 0),
+	// 		Value:    "value",
+	// 	}
+	//
+	// 	http.SetCookie(w, &cookie)
+	// }
 
-	var ( // Imagine we're in a http.Handler.
-		w http.ResponseWriter
-		r *http.Request
-	)
-
-	cookie := http.Cookie{
-		Name:     "name",
-		Domain:   "example.com",
-		Path:     "/",
-		Secure:   true,                         // HTTPS only.
-		SameSite: samesite.None(r.UserAgent()), // Set SameSite=None unless browser is incompatible.
-		HttpOnly: true,
-		MaxAge:   3600 * 24 * 365,
-		Expires:  time.Now().AddDate(1, 0, 0),
-		Value:    "value",
-	}
-
-	http.SetCookie(w, &cookie)
+	// Output:
 }
 
 func TestCookieSetSameSiteNone(t *testing.T) {
