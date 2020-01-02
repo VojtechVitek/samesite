@@ -8,7 +8,7 @@ import (
 	"github.com/VojtechVitek/samesite"
 )
 
-func ExampleNone() {
+func ExampleSetCookieSameSiteNone() {
 	var ( // Imagine we're in a http.Handler.
 		w http.ResponseWriter
 		r *http.Request
@@ -29,7 +29,7 @@ func ExampleNone() {
 	http.SetCookie(w, &cookie)
 }
 
-func TestNone(t *testing.T) {
+func TestSetCookieSameSiteNone(t *testing.T) {
 	tt := []struct {
 		userAgent                string
 		setSameSiteNoneAttribute bool
