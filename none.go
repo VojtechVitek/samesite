@@ -9,8 +9,8 @@ import (
 // Returns SameSite=None cookie attribute based on the list of incompatible browsers,
 // as described at https://www.chromium.org/updates/same-site/incompatible-clients.
 //
-// Imcompatible browser: returns 0 to drop the attribute
-// Compatible browser: returns http.SameSiteNoneMode
+// SameSite=None imcompatible user-agent returns 0 to drop the cookie attribute entirely.
+// SameSite=None compatible user-agent returns http.SameSiteNoneMode.
 func None(userAgent string) http.SameSite {
 	ua := uasurfer.Parse(userAgent)
 

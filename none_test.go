@@ -8,7 +8,9 @@ import (
 	"github.com/VojtechVitek/samesite"
 )
 
-func ExampleSetCookieSameSiteNone() {
+func ExampleCookieSetSameSiteNone() {
+	// import "github.com/VojtechVitek/samesite"
+
 	var ( // Imagine we're in a http.Handler.
 		w http.ResponseWriter
 		r *http.Request
@@ -19,7 +21,7 @@ func ExampleSetCookieSameSiteNone() {
 		Domain:   "example.com",
 		Path:     "/",
 		Secure:   true,                         // HTTPS only.
-		SameSite: samesite.None(r.UserAgent()), // SameSite=None unless browser is incompatible.
+		SameSite: samesite.None(r.UserAgent()), // Set SameSite=None unless browser is incompatible.
 		HttpOnly: true,
 		MaxAge:   3600 * 24 * 365,
 		Expires:  time.Now().AddDate(1, 0, 0),
@@ -29,7 +31,7 @@ func ExampleSetCookieSameSiteNone() {
 	http.SetCookie(w, &cookie)
 }
 
-func TestSetCookieSameSiteNone(t *testing.T) {
+func TestCookieSetSameSiteNone(t *testing.T) {
 	tt := []struct {
 		userAgent                string
 		setSameSiteNoneAttribute bool
