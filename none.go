@@ -2,9 +2,19 @@ package samesite
 
 import (
 	"net/http"
+	"regexp"
 
 	"github.com/avct/uasurfer"
 )
+
+var isMacEmbeddedBrowserRegexp = regexp.MustCompile(`^Mozilla\/[\.\d]+ \(Macintosh;.*Mac OS X [_\d]+\) AppleWebKit\/[\.\d]+ \(KHTML, like Gecko\)`)
+
+func isMacEmbeddedBrowser(userAgent string) bool {
+	if isMacEmbeddedBrowserRegexp.MatchString(userAgent) {
+		return true
+	}
+	return false
+}
 
 // Returns SameSite=None cookie attribute based on the list of incompatible browsers,
 // as described at https://www.chromium.org/updates/same-site/incompatible-clients.
@@ -23,7 +33,7 @@ func None(userAgent string) http.SameSite {
 	if ua.OS.Name == uasurfer.OSiOS && ua.OS.Version.Major == 12 {
 		return 0
 	}
-	if ua.OS.Name == uasurfer.OSMacOSX && ua.OS.Version.Major == 10 && ua.OS.Version.Minor == 14 && ua.Browser.Name == uasurfer.BrowserSafari {
+	if ua.OS.Name == uasurfer.OSMacOSX && ua.OS.Version.Major == 10 && ua.OS.Version.Minor == 14 && (ua.Browser.Name == uasurfer.BrowserSafari || isMacEmbeddedBrowser(userAgent)) {
 		return 0
 	}
 
