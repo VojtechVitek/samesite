@@ -23,7 +23,7 @@ func None(userAgent string) http.SameSite {
 	if ua.OS.Name == uasurfer.OSiOS && ua.OS.Version.Major == 12 {
 		return 0
 	}
-	if ua.OS.Name == uasurfer.OSMacOSX && ua.OS.Version.Major == 10 && ua.OS.Version.Minor == 14 && ua.Browser.Name == uasurfer.BrowserSafari {
+	if ua.OS.Name == uasurfer.OSMacOSX && ua.OS.Version.Major == 10 && ua.OS.Version.Minor == 14 && (ua.Browser.Name == uasurfer.BrowserSafari || ua.Browser.Name == uasurfer.BrowserUnknown) {
 		return 0
 	}
 
