@@ -9,7 +9,7 @@ import (
 )
 
 func ExampleNone() {
-	var ( // mock the http.Handler arguments
+	var ( // Imagine we're in a http.Handler.
 		w http.ResponseWriter
 		r *http.Request
 	)
@@ -19,10 +19,10 @@ func ExampleNone() {
 		Domain:   "example.com",
 		Path:     "/",
 		Secure:   true,                         // HTTPS only.
-		SameSite: samesite.None(r.UserAgent()), // Meant for api.pressly.com only. For vanity cookies, use http.SameSiteStrictMode instead.
-		HttpOnly: true,                         // Cookie inaccessible to JavaScript's Document.cookie.
-		MaxAge:   3600 * 24 * 365,              // Max-age is 1 year; used in all major browsers except IE.
-		Expires:  time.Now().AddDate(1, 0, 0),  // Expires in 1 year; used in IE.
+		SameSite: samesite.None(r.UserAgent()), // SameSite=None unless browser is incompatible.
+		HttpOnly: true,
+		MaxAge:   3600 * 24 * 365,
+		Expires:  time.Now().AddDate(1, 0, 0),
 		Value:    "value",
 	}
 
